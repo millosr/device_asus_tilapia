@@ -13,13 +13,13 @@ on early-boot
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-	
 
 on fs
     mkdir /factory 0775 radio radio
 
     setprop ro.crypto.umount_sd false
     mount_all /fstab.grouper
+    swapon_all /fstab.grouper
 
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
@@ -149,7 +149,6 @@ on boot
     chown system system /sys/bus/iio/devices/iio:device0/smd_threshold
     chown system system /sys/bus/iio/devices/iio:device0/smd_delay_threshold
     chown system system /sys/bus/iio/devices/iio:device0/smd_delay_threshold2
-
     ## AMI compass sensor
     chown system system /dev/iio:device1
     chown system system /sys/bus/iio/devices/trigger1/name
@@ -196,7 +195,6 @@ on boot
     chmod 600 /sys/bus/iio/devices/iio:device0/scan_elements/in_timestamp_en
     chmod 600 /sys/bus/iio/devices/iio:device0/temperature
     chmod 600 /sys/bus/iio/devices/iio:device0/trigger/current_trigger
-
     # new in MA 5.1.5
     chmod 600 /sys/bus/iio/devices/iio:device0/secondary_name
     chmod 600 /sys/bus/iio/devices/iio:device0/dmp_firmware
@@ -222,7 +220,6 @@ on boot
     chmod 600 /sys/bus/iio/devices/iio:device0/smd_threshold
     chmod 600 /sys/bus/iio/devices/iio:device0/smd_delay_threshold
     chmod 600 /sys/bus/iio/devices/iio:device0/smd_delay_threshold2
-
     ## AMI compass sensor
     chmod 600 /dev/iio:device1
     chmod 600 /sys/bus/iio/devices/trigger1/name
@@ -316,6 +313,15 @@ on property:ril.ipv6.rmnet1.enable=1
 
 on property:ril.ipv6.rmnet1.enable=0
     write /proc/sys/net/ipv6/conf/rmnet1/disable_ipv6 1
+
+# initialize KSM
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
+
+# config swap
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/swappiness 100
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -422,7 +428,7 @@ on property:sys.shutdown.requested=1recovery
 service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
     class main
     user root
-    group shell	
+    group shell
 
 # may restart due to /data/tf not existing yet
 on property:init.svc.tf_daemon=restarting

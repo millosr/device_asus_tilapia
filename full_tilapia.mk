@@ -29,4 +29,5 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 PRODUCT_NAME := full_tilapia
 PRODUCT_DEVICE := tilapia
 PRODUCT_BRAND := Android
-PRODUCT_MODEL := AOSP on Tilapia
+PRODUCT_MODEL := Nexus 7 3G
+PRODUCT_MANUFACTURER := Asus
