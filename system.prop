@@ -34,3 +34,12 @@ dalvik.vm.heapidealfree=8388608
 dalvik.vm.heapconcurrentstart=2097152
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
 
+# zram, zswap, vnswap, swap and memory
+persist.sys.zram_size=167772160
+persist.sys.zram_enable=true
+persist.sys.zswap_size=22
+persist.sys.zswap_zmin=70
+persist.sys.vnswap_enable=false
+persist.sys.vnswap_size=5242880
+persist.sys.ram_minfree=138240
+
