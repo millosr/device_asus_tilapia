@@ -30,10 +30,9 @@
 #include "cutils/misc.h"
 #include "cutils/properties.h"
 #include "edify/expr.h"
-#include "mincrypt/sha.h"
-#include "minzip/DirUtil.h"
-#include "mtdutils/mounts.h"
-#include "mtdutils/mtdutils.h"
+/* #include "mincrypt/sha.h" 
+#include "minzip/DirUtil.h" 
+#include "mounts.h" */
 #include "downloadFN.h"
 
 Value* DownloadModemFn(const char* name, State* state, int argc, Expr* argv[]) {
