@@ -30,6 +30,10 @@ $(call inherit-product, device/asus/grouper/device-common.mk)
 DEVICE_PACKAGE_OVERLAYS := \
     device/asus/tilapia/overlay
 
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
+
 VENDOR_FOLDER := vendor/asus/tilapia
 PRODUCT_COPY_FILES += \
 	$(VENDOR_FOLDER)/proprietary/vendor/lib/libxgold-ril.so:system/lib/libxgold-ril.so \
