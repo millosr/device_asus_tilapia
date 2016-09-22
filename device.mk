@@ -35,6 +35,6 @@ $(call inherit-product, device/asus/grouper/device-common.mk)
 $(call inherit-product-if-exists, vendor/asus/tilapia/device-vendor.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.version.updater=nAOSProm-6.0-tilapia-b$(ROM_BUILD_NUM) \
-    persist.rom.updater.uri=http://bit.ly/1QwJiUf
+    ro.build.version.updater=nAOSProm-7.0-tilapia-b$(ROM_BUILD_NUM) \
+    persist.rom.updater.uri=http://bit.ly/2cTZhNk
 
