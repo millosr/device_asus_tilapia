@@ -17,7 +17,8 @@ ro.zygote.disable_gl_preload=true
 
 # configure PRISM
 persist.tegra.didim.video = 5
-
+persist.tegra.didim.enable = 1
+persist.tegra.didim.normal = 3
 
 lpa.use-stagefright=false
 
@@ -26,13 +27,38 @@ lpa.use-stagefright=false
 dalvik.vm.dex2oat-flags=--no-watch-dog
 
 dalvik.vm.dexopt-flags=m=y
+dalvik.vm.dex2oat-filter=everything
+dalvik.vm.image-dex2oat-filter=everything
 dalvik.vm.heapstartsize=8m
-dalvik.vm.heapgrowthlimit=64m
-dalvik.vm.heapsize=256m
+dalvik.vm.heapgrowthlimit=128m
+dalvik.vm.heapsize=174m
 dalvik.vm.heaputilization=0.25
 dalvik.vm.heapidealfree=8388608
 dalvik.vm.heapconcurrentstart=2097152
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
+
+dalvik.vm.verify-bytecode=false
+dalvik.vm.checkjni=false
+persist.adb.notify=0
+ro.kernel.android.checkjni=0
+ro.kernel.checkjni=0
+#ro.ril.disable.power.collapse=0
+pm.sleep_mode=1
+ro.config.hw_power_saving=true
+ro.sys.fw.bg_apps_limit=10
+persist.debug.wfd.enable=1
+persist.sys.force_highendgfx=true
+config.disable_atlas=true
+ro.config.max_starting_bg=8
+
+# 16bit Transparency
+persist.sys.use_16bpp_alpha=1
+
+#config low ram device
+#ro.config.low_ram=true
+
+#disable scrolling cache (1 = on, 2 = sometimes on, 3 = sometimes off, 4 = allways off)
+persist.sys.scrollingcache=4
 
 # zram, zswap, vnswap, swap and memory
 persist.sys.zram_size=167772160
