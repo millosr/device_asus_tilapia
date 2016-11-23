@@ -4,9 +4,7 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
-    # Set init and its forked children's oom_adj.
-    write /proc/1/oom_score_adj -1000
-    mount debugfs debugfs /sys/kernel/debug
+    symlink /sdcard /storage/sdcard0
 
 on early-boot
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
@@ -15,15 +13,11 @@ on early-boot
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
 
 on fs
-    mkdir /factory 0775 radio radio
-
     setprop ro.crypto.umount_sd false
     mount_all /fstab.grouper
-    swapon_all /fstab.grouper
+#    swapon_all /fstab.grouper
 
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-
     # change back to bluetooth from system
     chown bluetooth net_bt_stack /data/misc/bluetooth
 
@@ -38,9 +32,18 @@ on post-fs-data
     chown root root /data/lightsensor
     mkdir /data/calibration
     mkdir /data/amit
-    
-    mkdir /data/radio 0775 radio radio
-    mkdir /data/radio/log 0775 radio radio
+
+    # gps
+    mkdir /data/gps
+    chown gps system /data/gps
+    chmod 1770 /data/gps
+    write /sys/class/gpio/export 162
+    write /sys/class/gpio/gpio162/value 0
+    write /sys/class/gpio/gpio162/direction out
+    chown gps system /sys/class/gpio/gpio162/value
+    chmod 0644 /sys/class/gpio/gpio162/value
+    chown gps system /dev/ttyHS1
+    chmod 0660 /dev/ttyHS1
 
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
@@ -262,22 +265,26 @@ on boot
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/max_boost
     chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
 
 # Default Read Ahead value for sdcards
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
-
-# GPS init
-    write /sys/class/gpio/export 162
-    write /sys/class/gpio/gpio162/value 0
-    write /sys/class/gpio/gpio162/direction out
-    chown gps system /sys/class/gpio/gpio162/value
-    chmod 0664 /sys/class/gpio/gpio162/value
-    mkdir /data/gps
-    chown gps system /data/gps
-    chmod 1770 /data/gps
-    chown gps system /dev/ttyHS1
-    chmod 0660 /dev/ttyHS1
+    write /sys/block/mmcblk0/queue/read_ahead_kb 128
+    write /sys/block/mmcblk1/queue/read_ahead_kb 128
 
 # ril
     chown radio system /sys/devices/virtual/ril/files/crash_dump_onoff
@@ -296,7 +303,7 @@ on boot
 
 # Touch
     chown system system /dev/elan-iap
-    chown system system /proc/ektf_dbg
+    chown system system /proc/ektf_dbg  
     start touch_fw_update
 
 # the following settings are used to disable ipv6 on cellular networks that cannot
@@ -322,6 +329,25 @@ on property:ril.ipv6.rmnet1.enable=0
 # config swap
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
+
+# some additional performance tweaks (to be tested)
+	setprop dalvik.vm.heapgrowthlimit 128m
+	setprop dalvik.vm.heapsize 174m
+	write /sys/module/lowmemorykiller/parameters/adj "0,1,2,4,7,15"
+	write /sys/module/lowmemorykiller/parameters/minfree "8192,10240,12288,14336,16384,20480"
+	write /sys/module/lowmemorykiller/parameters/cost 48
+	write /proc/sys/vm/highmem_is_dirtyable 1
+	write /sys/block/mmcblk0/queue/nr_requests 512
+	write /sys/block/mmcblk0/queue/add_random 0
+	write /sys/block/mmcblk0/queue/rq_affinity 2
+	write /sys/block/mmcblk0/queue/iosched/slice_idle 0
+	write /sys/block/mmcblk0/queue/iosched/group_idle 10
+	write /sys/block/mmcblk0/queue/iosched/back_seek_penalty 1
+	write /sys/block/mmcblk0/queue/iosched/quantum 16
+	write /sys/block/mmcblk0/queue/iosched/slice_async_rq 4
+	write /sys/block/mmcblk0/queue/iosched/back_seek_max 2147483647
+	write /sys/devices/tegradc.0/smartdimmer/enable 0
+	write /sys/devices/host1x/gr3d/enable_3d_scaling 1
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -393,7 +419,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     oneshot
 
 #Sensor: load calibration files.
-service sensors-config /system/bin/sensors-config
+    service sensors-config /system/bin/sensors-config
     class main
     user root
     oneshot
@@ -408,10 +434,11 @@ service bugreport /system/bin/dumpstate -d -p -B \
     keycodes 115 114
 
 # Start GPS daemon
-service gps-daemon /system/bin/gps_daemon.sh
-  user gps
-  group system
-  class late_start
+service gpsd /vendor/bin/gpsd -c /system/etc/gps.xml
+    class main
+    socket gps seqpacket 0660 gps system
+    user gps
+    group system wakelock inet sdcard_rw
 
 # Recovery daemon: configure MSC partition
 service recoveryd /system/bin/recoveryd /dev/block/platform/sdhci-tegra.3/by-name/MSC
@@ -424,8 +451,11 @@ service recoveryd /system/bin/recoveryd /dev/block/platform/sdhci-tegra.3/by-nam
 on property:sys.shutdown.requested=1recovery
     start recoveryd
 
+on property:ro.build.type=userdebug
+    start adbd
+
 # start tf_daemon service
-service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
+service tf_daemon /vendor/bin/tf_daemon -storageDir /data/tf -d
     class main
     user root
     group shell
@@ -434,19 +464,11 @@ service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
 on property:init.svc.tf_daemon=restarting
     mkdir /data/tf
 
-# create filesystems if necessary
-service setup_fs /system/bin/setup_fs \
-        /dev/block/platform/sdhci-tegra.3/by-name/UDA \
-        /dev/block/platform/sdhci-tegra.3/by-name/CAC
-    class core
-    user root
-    group root
-    oneshot
-
 service touch_fw_update /system/bin/touch_fw_update.sh
     class main
     disabled
     user root
     group root
     oneshot
+
 

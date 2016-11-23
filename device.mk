@@ -22,14 +22,15 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES := \
     device/asus/tilapia/fstab.grouper:root/fstab.grouper \
-    device/asus/tilapia/init.recovery.tilapia.rc:root/init.recovery.grouper.rc \
     device/asus/tilapia/init.tilapia.rc:root/init.grouper.rc
-
-DEVICE_PACKAGE_OVERLAYS := \
-    device/asus/tilapia/overlay
 
 # the actual meat of the device-specific product definition
 $(call inherit-product, device/asus/grouper/device-common.mk)
 
-# inherit from the non-open-source side, if present
-$(call inherit-product-if-exists, vendor/asus/tilapia/device-vendor.mk)
+DEVICE_PACKAGE_OVERLAYS := \
+    device/asus/tilapia/overlay
+
+VENDOR_FOLDER := vendor/asus/tilapia
+PRODUCT_COPY_FILES += \
+	$(VENDOR_FOLDER)/proprietary/vendor/lib/libxgold-ril.so:system/lib/libxgold-ril.so \
+	$(VENDOR_FOLDER)/proprietary/etc/apns-conf.xml:system/etc/apns-conf.xml
