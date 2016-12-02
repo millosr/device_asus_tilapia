@@ -64,6 +64,12 @@
         android:key="category_urom_mentions"
         android:title="@string/urom_about_thanks" >
         <Preference
+            android:title="AndDiSa"
+            android:summary="@string/urom_about_developer">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="http://forum.xda-developers.com/member.php?u=2188693" />
+        </Preference>
+        <Preference
             android:title="daniel_hk"
             android:summary="@string/urom_about_developer">
             <intent android:action="android.intent.action.VIEW"
