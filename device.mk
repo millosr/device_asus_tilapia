@@ -22,7 +22,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES := \
     device/asus/tilapia/fstab.grouper:root/fstab.grouper \
-    device/asus/tilapia/init.recovery.tilapia.rc:root/init.recovery.grouper.rc \
     device/asus/tilapia/init.tilapia.rc:root/init.grouper.rc
 
 DEVICE_PACKAGE_OVERLAYS := \
@@ -41,4 +40,3 @@ $(call inherit-product-if-exists, vendor/asus/tilapia/device-vendor.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.version.updater=nAOSProm-7.1.1-tilapia-b$(ROM_BUILD_NUM) \
     persist.rom.updater.uri=http://bit.ly/2fZmi2n
-

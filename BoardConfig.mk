@@ -28,12 +28,8 @@
 # the true camera library when the vendor tree is available.  Similarly,
 # we set USE_PROPRIETARY_AUDIO_EXTENSIONS to true in the proprietary variant as
 # well.
-
 USE_CAMERA_STUB := true
 USE_PROPRIETARY_AUDIO_EXTENSIONS := false
-
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_tilapia
-TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libIMCdownload libPrgHandler
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/asus/tilapia
 
