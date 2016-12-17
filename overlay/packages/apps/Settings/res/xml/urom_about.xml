@@ -29,7 +29,7 @@
             android:title="@string/urom_about_xda_title"
             android:summary="@string/urom_about_xda_summary">
             <intent android:action="android.intent.action.VIEW"
-                    android:data="http://forum.xda-developers.com/nexus-7/development/rom-naosprom-google-nexus-7-t3331116" />
+                    android:data="http://forum.xda-developers.com/nexus-7/development/rom-naosprom-nexus-7-2012-t3467335" />
         </Preference>
 
         <!-- Translation -->
