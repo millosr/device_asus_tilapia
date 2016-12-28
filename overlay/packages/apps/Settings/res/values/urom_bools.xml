@@ -17,6 +17,7 @@
  */
 -->
 <resources>
+    <bool name="config_urom_ambient" translatable="false">false</bool>
     <bool name="config_urom_lightbar" translatable="false">false</bool>
     <bool name="config_urom_mainkeys" translatable="false">false</bool>
     <bool name="config_urom_camerakey" translatable="false">false</bool>
@@ -25,4 +26,6 @@
     <bool name="config_urom_zram" translatable="false">true</bool>
     <bool name="config_urom_ksm" translatable="false">false</bool>
     <bool name="config_urom_speakerprox" translatable="false">false</bool>
+    <bool name="config_urom_lockscreen_phone" translatable="false">false</bool>
+    <bool name="config_urom_jack_broken" translatable="false">false</bool>
 </resources>
