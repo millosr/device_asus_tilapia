@@ -62,6 +62,6 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_default" translatable="false">
-        wifi,cell,battery,dnd,flashlight,rotation,bt,airplane,location,network_adb,caffeine,immersive_mode,cast,hotspot,saver,sync,usb_tether
+        wifi,cell,battery,dnd,flashlight,rotation,bt,airplane,location,network_adb,caffeine,immersive_mode,cast,hotspot,saver,sync,usb_tether,nfc
     </string>
 </resources>
