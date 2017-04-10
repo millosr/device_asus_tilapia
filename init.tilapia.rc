@@ -353,7 +353,7 @@ on property:ril.ipv6.rmnet1.enable=0
 
 # config swap
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/swappiness 60
 
 # some additional performance tweaks (to be tested)
 	setprop dalvik.vm.heapgrowthlimit 128m
