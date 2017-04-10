@@ -79,3 +79,5 @@ persist.sys.vnswap_enable=false
 persist.sys.vnswap_size=5242880
 persist.sys.ram_minfree=138240
 
+ro.opa.eligible_device=true
+
