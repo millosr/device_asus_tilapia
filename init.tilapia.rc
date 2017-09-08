@@ -265,12 +265,12 @@ on boot
     write /sys/devices/system/cpu/cpufreq/intelliactive/boost 0
     write /sys/devices/system/cpu/cpufreq/intelliactive/boostpulse 1
     write /sys/devices/system/cpu/cpufreq/intelliactive/boostpulse_duration 80000
-    write /sys/devices/system/cpu/cpufreq/intelliactive/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/intelliactive/go_hispeed_load 75
     write /sys/devices/system/cpu/cpufreq/intelliactive/hispeed_freq 860000
     write /sys/devices/system/cpu/cpufreq/intelliactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/intelliactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/intelliactive/sampling_down_factor 60000
-    write /sys/devices/system/cpu/cpufreq/intelliactive/sync_freq 780000
+    write /sys/devices/system/cpu/cpufreq/intelliactive/sync_freq 475000
     write /sys/devices/system/cpu/cpufreq/intelliactive/target_loads 90
     write /sys/devices/system/cpu/cpufreq/intelliactive/timer_rate 10000
     write /sys/devices/system/cpu/cpufreq/intelliactive/timer_slack 30000
@@ -280,6 +280,9 @@ on boot
     write /sys/module/cpu_tegra3/parameters/no_lp 0
     write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
     write /sys/module/cpuidle/parameters/lp2_in_idle 0
+    write /sys/module/intelli_plug/parameters/intelli_plug_active 1
+    write /sys/module/intelli_plug/parameters/nr_run_profile_sel 0
+    write /sys/module/intelli_plug/parameters/screen_off_max 475000
 
 # Inteelliactive governor settings
     chown system system /sys/devices/system/cpu/cpufreq/intelliactive/above_hispeed_delay
@@ -379,7 +382,7 @@ on property:ril.ipv6.rmnet1.enable=0
 # some additional performance tweaks (to be tested)
 	setprop dalvik.vm.heapgrowthlimit 128m
 	setprop dalvik.vm.heapsize 174m
-	write /sys/module/lowmemorykiller/parameters/adj "0,1,2,4,7,15"
+	write /sys/module/lowmemorykiller/parameters/adj "0,1,2,7,14,16"
 	write /sys/module/lowmemorykiller/parameters/minfree "8192,10240,12288,14336,16384,20480"
 	write /sys/module/lowmemorykiller/parameters/cost 48
 	write /proc/sys/vm/highmem_is_dirtyable 1
