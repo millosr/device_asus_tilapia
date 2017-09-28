@@ -17,6 +17,8 @@ on early-boot
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor intelliactive
 
 on fs
+    mkdir /factory 0775 radio radio
+
     setprop ro.crypto.umount_sd false
     mount_all /fstab.grouper
     swapon_all /fstab.grouper
@@ -41,18 +43,6 @@ on post-fs-data
 
     mkdir /data/radio 0775 radio radio
     mkdir /data/radio/log 0775 radio radio
-
-    # gps
-    mkdir /data/gps
-    chown gps system /data/gps
-    chmod 1770 /data/gps
-    write /sys/class/gpio/export 162
-    write /sys/class/gpio/gpio162/value 0
-    write /sys/class/gpio/gpio162/direction out
-    chown gps system /sys/class/gpio/gpio162/value
-    chmod 0644 /sys/class/gpio/gpio162/value
-    chown gps system /dev/ttyHS1
-    chmod 0660 /dev/ttyHS1
 
     # gps
     mkdir /data/gps
