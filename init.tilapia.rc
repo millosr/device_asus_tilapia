@@ -257,25 +257,25 @@ on boot
     write /sys/devices/system/cpu/cpufreq/intelliactive/boostpulse 1
     write /sys/devices/system/cpu/cpufreq/intelliactive/boostpulse_duration 100000
     write /sys/devices/system/cpu/cpufreq/intelliactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/intelliactive/hispeed_freq 860000
+    write /sys/devices/system/cpu/cpufreq/intelliactive/hispeed_freq 1000000
     write /sys/devices/system/cpu/cpufreq/intelliactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/intelliactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/intelliactive/sampling_down_factor 60000
-    write /sys/devices/system/cpu/cpufreq/intelliactive/sync_freq 760000
+    write /sys/devices/system/cpu/cpufreq/intelliactive/sync_freq 860000
     write /sys/devices/system/cpu/cpufreq/intelliactive/target_loads 90
     write /sys/devices/system/cpu/cpufreq/intelliactive/timer_rate 10000
     write /sys/devices/system/cpu/cpufreq/intelliactive/timer_slack 30000
-    write /sys/devices/system/cpu/cpufreq/intelliactive/up_threshold_any_cpu_freq 760000
-    write /sys/devices/system/cpu/cpufreq/intelliactive/up_threshold_any_cpu_load 65
-    write /sys/devices/system/cpu/cpufreq/intelliactive/two_phase_freq 860000,860000,860000,860000
+    write /sys/devices/system/cpu/cpufreq/intelliactive/up_threshold_any_cpu_freq 860000
+    write /sys/devices/system/cpu/cpufreq/intelliactive/up_threshold_any_cpu_load 75
+    write /sys/devices/system/cpu/cpufreq/intelliactive/two_phase_freq 1000000,1000000,1000000,1000000
     write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
+    write /sys/module/cpu_tegra3/parameters/auto_hotplug 0
     write /sys/module/cpuidle/parameters/lp2_in_idle 0
     write /sys/module/intelli_plug/parameters/nr_run_profile_sel 0
     write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold 4000
     write /sys/module/intelli_plug/parameters/nr_run_hysteresis 12
     write /sys/module/intelli_plug/parameters/screen_off_max 620000
-    write /sys/module/intelli_plug/parameters/intelli_plug_active 0
+    write /sys/module/intelli_plug/parameters/intelli_plug_active 1
 
 # Intelliactive governor settings
     chown system system /sys/devices/system/cpu/cpufreq/intelliactive/above_hispeed_delay
@@ -390,7 +390,10 @@ on property:ril.ipv6.rmnet1.enable=0
 
 # config swap
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 60
+    write /proc/sys/vm/swappiness 70
+    write /proc/sys/vm/dirty_ratio 25
+    write /proc/sys/vm/dirty_background_ratio 10 
+    write /sys/block/zram0/max_comp_streams 2
 
 # some additional performance tweaks (to be tested)
 	setprop dalvik.vm.heapgrowthlimit 128m
