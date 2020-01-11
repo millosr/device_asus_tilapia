@@ -56,5 +56,10 @@ $(call add-product-dex-preopt-module-config,services,--compiler-filter=everythin
 PRODUCT_PROPERTY_OVERRIDES += \
 dalvik.vm.dex2oat-flags=--no-watch-dog \
 dalvik.vm.dex2oat-filter=everything \
-dalvik.vm.image-dex2oat-filter=everything
+dalvik.vm.image-dex2oat-filter=everything \
+dalvik.vm.check-dex-sum=false \
+dalvik.vm.checkjni=false \
+dalvik.vm.usejit=true \
+dalvik.vm.heaptargetutilization=0.9 \
+dalvik.vm.dexopt-flags=v=a,o=v
 
