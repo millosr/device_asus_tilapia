@@ -30,7 +30,7 @@ lpa.use-stagefright=false
 
 # Dalvik and other tweaks
 dalvik.vm.heapgrowthlimit=128m
-dalvik.vm.heapsize=174m
+dalvik.vm.heapsize=256m
 dalvik.vm.verify-bytecode=false
 persist.adb.notify=0
 ro.kernel.android.checkjni=0
@@ -53,7 +53,7 @@ persist.sys.use_16bpp_alpha=1
 #ro.config.low_ram=true
 
 #disable scrolling cache (1 = on, 2 = sometimes on, 3 = sometimes off, 4 = allways off)
-persist.sys.scrollingcache=4
+persist.sys.scrollingcache=1
 
 #debug flags
 ro.adb.secure=0

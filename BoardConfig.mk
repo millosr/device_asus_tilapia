@@ -52,6 +52,8 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := false
 TARGET_ENABLE_NON_PIE_SUPPORT := true
 WITH_DEXPREOPT := false
 HWUI_COMPILE_FOR_PERF := true
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+
 $(call add-product-dex-preopt-module-config,services,--compiler-filter=everything)
 PRODUCT_PROPERTY_OVERRIDES += \
 dalvik.vm.dex2oat-flags=--no-watch-dog \
@@ -62,4 +64,8 @@ dalvik.vm.checkjni=false \
 dalvik.vm.usejit=true \
 dalvik.vm.heaptargetutilization=0.9 \
 dalvik.vm.dexopt-flags=v=a,o=v
+
+PRODUCT_PROPERTY_OVERRIDES += \
+     pm.dexopt.shared=quicken
+
 
