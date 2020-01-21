@@ -28,4 +28,5 @@
     <bool name="config_urom_speakerprox" translatable="false">false</bool>
     <bool name="config_urom_lockscreen_phone" translatable="false">false</bool>
     <bool name="config_urom_jack_broken" translatable="false">false</bool>
+    <bool name="config_urom_sdcardfs" translatable="false">false</bool>
 </resources>
