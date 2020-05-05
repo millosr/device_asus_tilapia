@@ -41,5 +41,5 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.version.updater=nAOSProm-7.1.2-tilapia-b$(ROM_BUILD_NUM) \
-    persist.rom.updater.uri=http://bit.ly/2fZmi2n
+    persist.rom.updater.uri=https://dl.dropboxusercontent.com/s/3zqhkta4buryrmo/updates-nAOSP-7.1.2-tilapia.json?dl=0
 
