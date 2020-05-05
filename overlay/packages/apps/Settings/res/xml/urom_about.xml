@@ -5,26 +5,33 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-        android:key="urom_rom"
+        android:title="@string/urom_about_naosp">
+        <Preference
+            android:key="urom_version"
+            android:title="@string/urom_about_version"/>
+
+        <Preference
+            android:key="urom_build_date"
+            android:title="@string/urom_about_build_date"/>
+
+        <Preference
+            android:key="urom_selinux_status"
+            android:title="@string/selinux_status"
+            android:summary="@string/selinux_status_enforcing"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/urom_about_rom">
 
         <!-- Github -->
-        <!-- Preference
-            android:key="urom_source"
-            android:title="@string/urom_about_source_title"
-            android:summary="@string/urom_about_source_summary" />-->
         <Preference
             android:title="@string/urom_about_source_title"
             android:summary="@string/urom_about_source_summary">
             <intent android:action="android.intent.action.VIEW"
-                    android:data="https://github.com/millosr/naosp_manifest/tree/nAOSP-7.0-grouper" />
+                    android:data="https://github.com/millosr/naosp_manifest/tree/nAOSP-7.1.2-grouper" />
         </Preference>
 
         <!-- ROM XDA Thread -->
-        <!-- <Preference
-            android:key="urom_xda"
-            android:title="@string/urom_about_xda_title"
-            android:summary="@string/urom_about_xda_summary" /> -->
         <Preference
             android:title="@string/urom_about_xda_title"
             android:summary="@string/urom_about_xda_summary">
@@ -34,34 +41,39 @@
 
         <!-- Translation -->
         <Preference
-            android:key="urom_translation"
-            android:title="@string/urom_about_translation_title" />
+            android:title="@string/urom_about_translation_title">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="http://forum.xda-developers.com/showpost.php?p=65159347&amp;postcount=3644" />
+        </Preference>
 
         <!-- Donation -->
-        <!-- <Preference
-            android:key="urom_donation"
-            android:title="@string/urom_about_donation_title" /> -->
-
+        <Preference
+            android:title="@string/urom_about_donation_title">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://www.paypal.me/millosr" />
+        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="category_urom_developers"
         android:title="@string/urom_about_developers">
 
         <Preference
-            android:key="urom_devs_field1"
-            android:title="mickybart"
-            android:summary="@string/urom_about_leaddeveloper"/>
+            android:title="millosr"
+            android:summary="@string/urom_about_developer">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://forum.xda-developers.com/member.php?u=6754437" />
+        </Preference>
 
         <Preference
-            android:key="urom_devs_field2"
-            android:title="millosr"
-            android:summary="@string/urom_about_developer"/>
+            android:title="mickybart"
+            android:summary="@string/urom_about_developer">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://forum.xda-developers.com/member.php?u=6043081" />
+        </Preference>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="category_urom_mentions"
         android:title="@string/urom_about_thanks" >
         <Preference
             android:title="AndDiSa"
@@ -81,26 +93,37 @@
             <intent android:action="android.intent.action.VIEW"
                     android:data="http://forum.xda-developers.com/member.php?u=3326402" />
         </Preference>
+
         <Preference
-            android:key="urom_mentions_field1"
             android:title="billchen1977"
-            android:summary="@string/urom_about_developer" />
+            android:summary="@string/urom_about_developer">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://forum.xda-developers.com/member.php?u=5064452" />
+        </Preference>
         <Preference
-            android:key="urom_mentions_field2"
             android:title="ViPER4Android Team"
-            android:summary="@string/urom_about_soundfx" />
+            android:summary="@string/urom_about_soundfx">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="http://forum.xda-developers.com/showthread.php?t=2191223" />
+        </Preference>
         <Preference
-            android:key="urom_mentions_field3"
-            android:title="CyanogenMod Team"
-            android:summary="ROM" />
+            android:title="LineageOS Team"
+            android:summary="ROM">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://lineageos.org/" />
+        </Preference>
         <Preference
-            android:key="urom_mentions_field4"
             android:title="TWRP Team"
-            android:summary="FOTA Recovery" />
+            android:summary="FOTA Recovery">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://twrp.me/" />
+        </Preference>
         <Preference
-            android:key="urom_mentions_field5"
             android:title="Google"
-            android:summary="Android Open Source Project" />
+            android:summary="Android Open Source Project">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://source.android.com/" />
+        </Preference>
 
     </PreferenceCategory>
 
